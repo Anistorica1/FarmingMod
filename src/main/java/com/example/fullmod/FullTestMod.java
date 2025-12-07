@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
-@Mod(modid = "fullmod", name = "Move Mod", version = "1.0")
+@Mod(modid = "farmingmod_v1", name = "Move Mod", version = "1.0")
 public class FullTestMod {
 
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -21,6 +21,7 @@ public class FullTestMod {
     private int phase = 0;
     private boolean lastRKeyState = false;
     private int counter = 0;
+    private boolean markFirst = true;
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -32,7 +33,7 @@ public class FullTestMod {
         if (mc.thePlayer == null || mc.theWorld == null) return;
 
         // 检测 O 键是否从未按下 -> 按下一瞬间
-        boolean currentRKey = Keyboard.isKeyDown(Keyboard.KEY_O);
+        boolean currentRKey = Keyboard.isKeyDown(Keyboard.KEY_LBRACKET);
         if (currentRKey && !lastRKeyState) {
             running = !running;
             resetKeys();
@@ -49,13 +50,28 @@ public class FullTestMod {
 
         tickCounter++;
 
-        // 获取方块坐标，防止空指针
+        // 防止空指针
         if (mc.objectMouseOver == null || mc.objectMouseOver.getBlockPos() == null) return;
         BlockPos pos = mc.objectMouseOver.getBlockPos();
 
+        if (mc.thePlayer.posY == 70) {
+            phase = 5;
+            if (tickCounter == 200)
+            {
+                mc.thePlayer.sendChatMessage("/warp garden");
+                phase = 0;
+                tickCounter = 0;
+                counter = 9;
+                markFirst = true;
+            }
+
+        }
         switch (phase) {
+
             case 0:
-                if (tickCounter == 1 && counter == 9) mc.thePlayer.sendChatMessage("/warp garden");
+                if (tickCounter == 1 && counter == 9)
+                    mc.thePlayer.sendChatMessage("/warp garden");
+
                 if (tickCounter >= 30) {
                     phase++;
                     tickCounter = 0;
@@ -65,9 +81,16 @@ public class FullTestMod {
                 break;
 
             case 1: // 向左走 10 秒
-                if (tickCounter == 1) press(mc.gameSettings.keyBindLeft);
-                clickBlock(pos);
-                if (tickCounter >= 757) {
+                if (tickCounter == 1) {
+                    press(mc.gameSettings.keyBindSneak);
+                }
+                if (tickCounter == 8) {
+                    release(mc.gameSettings.keyBindSneak);
+                    press(mc.gameSettings.keyBindLeft);
+                }
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tickCounter >= 757 * 2) {
                     release(mc.gameSettings.keyBindLeft);
                     phase++;
                     tickCounter = 0;
@@ -76,8 +99,9 @@ public class FullTestMod {
 
             case 2: // 向前走 2 秒
                 if (tickCounter == 1) press(mc.gameSettings.keyBindForward);
-                clickBlock(pos);
-                if (tickCounter >= 20) {
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tickCounter >= 40) {
                     release(mc.gameSettings.keyBindForward);
                     phase++;
                     tickCounter = 0;
@@ -86,22 +110,42 @@ public class FullTestMod {
 
             case 3: // 向右走 10 秒
                 if (tickCounter == 1) press(mc.gameSettings.keyBindRight);
-                clickBlock(pos);
-                if (tickCounter >= 757) {
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tickCounter >= 757 * 2) {
                     release(mc.gameSettings.keyBindRight);
                     phase++;
                     tickCounter = 0;
                 }
                 break;
 
-            case 4: // 向前走 2 秒，之后回到 phase 0
+            case 4: // 向前走 2 秒，然后回到 phase 0
                 if (tickCounter == 1) press(mc.gameSettings.keyBindForward);
-                clickBlock(pos);
-                if (tickCounter >= 20) {
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tickCounter >= 40) {
                     release(mc.gameSettings.keyBindForward);
                     phase = 0;
                     tickCounter = 0;
                 }
+                break;
+
+            case 5:
+                resetKeys();
+
+                if (markFirst) {
+                    markFirst = false;
+                    tickCounter = 0;
+                }
+                if (tickCounter >= 400)
+                {
+                    mc.thePlayer.sendChatMessage("/warp garden");
+                    phase = 0;
+                    tickCounter = 0;
+                    counter = 9;
+                    markFirst = true;
+                }
+
                 break;
         }
     }
@@ -124,5 +168,7 @@ public class FullTestMod {
         release(mc.gameSettings.keyBindLeft);
         release(mc.gameSettings.keyBindRight);
         release(mc.gameSettings.keyBindForward);
+        release(mc.gameSettings.keyBindSneak);
+        release(mc.gameSettings.keyBindAttack);
     }
 }
