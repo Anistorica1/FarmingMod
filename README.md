@@ -1,2 +1,3 @@
-﻿# Farming mod for hypixel skyblock
+﻿# Farming mod for Hypixel Skyblock
+
 
