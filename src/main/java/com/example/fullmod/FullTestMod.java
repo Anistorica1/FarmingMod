@@ -116,7 +116,7 @@ public class FullTestMod {
                 }
                 press(mc.gameSettings.keyBindAttack);
 
-                if (tickCounter >= 757 * 2) {
+                if (tickCounter >= 1544) {
                     release(mc.gameSettings.keyBindLeft);
                     phase++;
                     tickCounter = 0;
@@ -138,7 +138,7 @@ public class FullTestMod {
                 if (tickCounter == 1) press(mc.gameSettings.keyBindRight);
                 press(mc.gameSettings.keyBindAttack);
 
-                if (tickCounter >= 757 * 2) {
+                if (tickCounter >= 1544) {
                     release(mc.gameSettings.keyBindRight);
                     phase++;
                     tickCounter = 0;
