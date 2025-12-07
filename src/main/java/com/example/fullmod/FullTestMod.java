@@ -66,6 +66,32 @@ public class FullTestMod {
             }
 
         }
+        if (mc.thePlayer.posY == 31) {
+            phase = 5;
+            if (tickCounter == 200)
+            {
+                mc.thePlayer.sendChatMessage("/l");
+                phase = 0;
+                tickCounter = 0;
+                counter = 9;
+                markFirst = true;
+            }
+
+        }
+        if(mc.thePlayer.posY == 71){
+        }
+        else {
+            phase = 5;
+            if (tickCounter == 200)
+            {
+                mc.thePlayer.sendChatMessage("/skyblock");
+                phase = 0;
+                tickCounter = 0;
+                counter = 9;
+                markFirst = true;
+            }
+
+        }
         switch (phase) {
 
             case 0:
@@ -130,7 +156,7 @@ public class FullTestMod {
                 }
                 break;
 
-            case 5:
+            case 5: //异常模块
                 resetKeys();
 
                 if (markFirst) {
