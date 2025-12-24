@@ -1,6 +1,6 @@
 [
 {
-  "modid": "farmingmod_v1",
+  "modid": "farmingmod_v1.2",
   "name": "Farming Mod",
   "description": "Example placeholder mod.",
   "version": "${version}",

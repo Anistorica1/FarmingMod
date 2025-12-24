@@ -13,7 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 import java.util.HashMap;
 import java.util.Map;
-@Mod(modid = "farmingmod_v1", name = "Farming Mod", version = "1.0")
+@Mod(modid = "farmingmod_v1.2", name = "Farming Mod", version = "1.2")
 public class FullTestMod {
 
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -168,7 +168,7 @@ public class FullTestMod {
                     release(mc.gameSettings.keyBindSneak);
                     phase++;
                     tickCounter = 0;
-                    counter = 15;
+                    counter = 9;
                 }
                 break;
 
@@ -217,6 +217,7 @@ public class FullTestMod {
                 if (tempx == mc.thePlayer.posX && tickCounter % 2 == 0 && tickCounter > 10) {
                     release(mc.gameSettings.keyBindForward);
                     tickCounter = 0;
+                    counter--;
                     if(counter != 0){phase = 1;break;}
                     phase = 0;
                 }
@@ -479,6 +480,7 @@ public class FullTestMod {
                 if (tempx == mc.thePlayer.posX && tickCounter % 2 == 0 && tickCounter > 20) {
                     release(mc.gameSettings.keyBindRight);
                     tickCounter = 0;
+                    counter--;
                     if(counter != 0){phase = 1;break;}
                     phase =0;
                 }
@@ -510,6 +512,7 @@ public class FullTestMod {
                 case 1:counter = 9;break;
                 case 2:counter = 9;break;
                 case 3:counter = 15;break;
+
             }
             cropfirst = false;
         }
