@@ -255,7 +255,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/warp garden");
                 phase = 0;
                 tickCounter = 0;
-                counter = 9;
+                counter = 15;
                 markFirst = true;
             }
 
@@ -267,7 +267,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/l");
                 phase = 0;
                 tickCounter = 0;
-                counter = 9;
+                counter = 15;
                 markFirst = true;
             }
 
@@ -281,7 +281,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/skyblock");
                 phase = 0;
                 tickCounter = 0;
-                counter = 9;
+                counter = 15;
                 markFirst = true;
             }
 
@@ -289,23 +289,22 @@ public class FullTestMod {
         switch (phase) {
 
             case 0:
-                if (tickCounter == 1 && counter == 9)
+                if (tickCounter == 1)
                     mc.thePlayer.sendChatMessage("/warp garden");
 
-                if (tickCounter >= 30) {
+                if (tickCounter == 30) {
+                    press(mc.gameSettings.keyBindSneak);
+                }
+                if (tickCounter == 38) {
+                    release(mc.gameSettings.keyBindSneak);
                     phase++;
                     tickCounter = 0;
-                    counter--;
-                    if (counter == 0) counter = 9;
+                    counter = 15;
                 }
                 break;
 
             case 1: // 向左走 10 秒
                 if (tickCounter == 1) {
-                    press(mc.gameSettings.keyBindSneak);
-                }
-                if (tickCounter == 8) {
-                    release(mc.gameSettings.keyBindSneak);
                     press(mc.gameSettings.keyBindLeft);
                 }
                 press(mc.gameSettings.keyBindAttack);
@@ -348,8 +347,10 @@ public class FullTestMod {
 
                 if (tempx == mc.thePlayer.posX && tickCounter % 2 == 0 && tickCounter > 10) {
                     release(mc.gameSettings.keyBindForward);
-                    phase = 0;
                     tickCounter = 0;
+                    counter--;
+                    if(counter != 0){phase = 1;break;}
+                    phase = 0;
                 }
                 tempx = mc.thePlayer.posX;
                 break;
@@ -391,7 +392,7 @@ public class FullTestMod {
             mc.thePlayer.sendChatMessage("/warp garden");
             phase = 0;
             tickCounter = 0;
-            counter = 15;
+            counter = 7;
             markFirst = true;
         }
 
@@ -403,7 +404,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/l");
                 phase = 0;
                 tickCounter = 0;
-                counter = 15;
+                counter = 7;
                 markFirst = true;
             }
 
@@ -417,7 +418,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/skyblock");
                 phase = 0;
                 tickCounter = 0;
-                counter = 15;
+                counter = 7;
                 markFirst = true;
             }
 
@@ -435,7 +436,7 @@ public class FullTestMod {
                     release(mc.gameSettings.keyBindSneak);
                     phase++;
                     tickCounter = 0;
-                    counter = 15;
+                    counter = 7;
                 }
                 break;
 
@@ -503,7 +504,7 @@ public class FullTestMod {
                     mc.thePlayer.sendChatMessage("/warp garden");
                     phase = 0;
                     tickCounter = 0;
-                    counter = 15;
+                    counter = 7;
                     markFirst = true;
                 }
 
@@ -640,7 +641,7 @@ public class FullTestMod {
         if (cropfirst){
             switch (dict.get(mode)) {
                 case 0:counter = 9;break;
-                case 1:counter = 9;break;
+                case 1:counter = 7;break;
                 case 2:counter = 9;break;
                 case 3:counter = 15;break;
                 case 4:counter = 15;break;
