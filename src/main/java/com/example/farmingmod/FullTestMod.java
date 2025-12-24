@@ -69,9 +69,6 @@ public class FullTestMod {
 
         tickCounter++;
 
-        // 防止空指针
-        if (mc.objectMouseOver == null || mc.objectMouseOver.getBlockPos() == null) return;
-        BlockPos pos = mc.objectMouseOver.getBlockPos();
         switch (dict.get(mode)) {
             case 0:
                 netherWartsFarming();
