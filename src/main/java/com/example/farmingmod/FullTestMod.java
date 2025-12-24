@@ -255,7 +255,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/warp garden");
                 phase = 0;
                 tickCounter = 0;
-                counter = 15;
+                counter = 7;
                 markFirst = true;
             }
 
@@ -267,7 +267,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/l");
                 phase = 0;
                 tickCounter = 0;
-                counter = 15;
+                counter = 7;
                 markFirst = true;
             }
 
@@ -281,7 +281,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/skyblock");
                 phase = 0;
                 tickCounter = 0;
-                counter = 15;
+                counter = 7;
                 markFirst = true;
             }
 
@@ -299,7 +299,7 @@ public class FullTestMod {
                     release(mc.gameSettings.keyBindSneak);
                     phase++;
                     tickCounter = 0;
-                    counter = 15;
+                    counter = 7;
                 }
                 break;
 
@@ -367,7 +367,7 @@ public class FullTestMod {
                     mc.thePlayer.sendChatMessage("/warp garden");
                     phase = 0;
                     tickCounter = 0;
-                    counter = 9;
+                    counter = 7;
                     markFirst = true;
                 }
 
@@ -392,7 +392,7 @@ public class FullTestMod {
             mc.thePlayer.sendChatMessage("/warp garden");
             phase = 0;
             tickCounter = 0;
-            counter = 7;
+            counter = 15;
             markFirst = true;
         }
 
@@ -404,7 +404,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/l");
                 phase = 0;
                 tickCounter = 0;
-                counter = 7;
+                counter = 15;
                 markFirst = true;
             }
 
@@ -418,7 +418,7 @@ public class FullTestMod {
                 mc.thePlayer.sendChatMessage("/skyblock");
                 phase = 0;
                 tickCounter = 0;
-                counter = 7;
+                counter = 15;
                 markFirst = true;
             }
 
@@ -436,7 +436,7 @@ public class FullTestMod {
                     release(mc.gameSettings.keyBindSneak);
                     phase++;
                     tickCounter = 0;
-                    counter = 7;
+                    counter = 15;
                 }
                 break;
 
@@ -504,7 +504,7 @@ public class FullTestMod {
                     mc.thePlayer.sendChatMessage("/warp garden");
                     phase = 0;
                     tickCounter = 0;
-                    counter = 7;
+                    counter = 15;
                     markFirst = true;
                 }
 
@@ -630,7 +630,7 @@ public class FullTestMod {
                     mc.thePlayer.sendChatMessage("/warp garden");
                     phase = 0;
                     tickCounter = 0;
-                    counter = 9;
+                    counter = 15;
                     markFirst = true;
                 }
 
