@@ -33,6 +33,7 @@ public class FullTestMod {
         dict.put("wheat", 1);
         dict.put("test", 2);
         dict.put("wildrose",3);
+        dict.put("cactus", 4);
     }
     private String mode = "netherwarts";
     @Mod.EventHandler
@@ -83,6 +84,9 @@ public class FullTestMod {
                 break;
             case 3:
                 wildroseFarming();
+                break;
+            case 4:
+                cactusWartsFarming();
                 break;
         }
 
@@ -505,6 +509,133 @@ public class FullTestMod {
 
                 break;
         }}
+    public void cactusWartsFarming(){
+        if (mc.thePlayer.posY == 70) {
+            phase = 5;
+            if (tickCounter == 200)
+            {
+                mc.thePlayer.sendChatMessage("/warp garden");
+                phase = 0;
+                tickCounter = 0;
+                counter = 16;
+                markFirst = true;
+            }
+
+        }
+        if (mc.thePlayer.posY == 31) {
+            phase = 5;
+            if (tickCounter == 200)
+            {
+                mc.thePlayer.sendChatMessage("/l");
+                phase = 0;
+                tickCounter = 0;
+                counter = 16;
+                markFirst = true;
+            }
+
+        }
+        if(mc.thePlayer.posY == 71){
+        }
+        else {
+            phase = 5;
+            if (tickCounter == 200)
+            {
+                mc.thePlayer.sendChatMessage("/skyblock");
+                phase = 0;
+                tickCounter = 0;
+                counter = 16;
+                markFirst = true;
+            }
+
+        }
+        switch (phase) {
+
+            case 0:
+                if (tickCounter == 1)
+                    mc.thePlayer.sendChatMessage("/warp garden");
+
+                if (tickCounter == 30) {
+                    press(mc.gameSettings.keyBindSneak);
+                }
+                if (tickCounter == 38) {
+                    release(mc.gameSettings.keyBindSneak);
+                    phase++;
+                    tickCounter = 0;
+                    counter = 16;
+                }
+                break;
+
+            case 1: // 向左走 10 秒
+                if (tickCounter == 1) {
+                    press(mc.gameSettings.keyBindLeft);
+                }
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tempz == mc.thePlayer.posZ  && tickCounter % 2 == 0 && tickCounter > 10) {
+                    release(mc.gameSettings.keyBindLeft);
+                    phase++;
+                    tickCounter = 0;
+                }
+                tempz = mc.thePlayer.posZ;
+                break;
+
+            case 2: // 向前走 2 秒
+                if (tickCounter == 1) press(mc.gameSettings.keyBindForward);
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tempx == mc.thePlayer.posX && tickCounter % 2 == 0 && tickCounter > 10) {
+                    release(mc.gameSettings.keyBindForward);
+                    phase++;
+                    tickCounter = 0;
+                }
+                tempx = mc.thePlayer.posX;
+                break;
+
+            case 3: // 向右走 10 秒
+                if (tickCounter == 1) press(mc.gameSettings.keyBindRight);
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tempz == mc.thePlayer.posZ && tickCounter % 2 == 0 && tickCounter > 10) {
+                    release(mc.gameSettings.keyBindRight);
+                    phase++;
+                    tickCounter = 0;
+                }
+                tempz = mc.thePlayer.posZ;
+                break;
+
+            case 4: // 向前走 2 秒，然后回到 phase 0
+                if (tickCounter == 1) press(mc.gameSettings.keyBindForward);
+                press(mc.gameSettings.keyBindAttack);
+
+                if (tempx == mc.thePlayer.posX && tickCounter % 2 == 0 && tickCounter > 10) {
+                    release(mc.gameSettings.keyBindForward);
+                    tickCounter = 0;
+                    counter--;
+                    if(counter != 0){phase = 1;break;}
+                    phase = 0;
+                }
+                tempx = mc.thePlayer.posX;
+                break;
+
+            case 5: //异常模块
+                resetKeys();
+
+                if (markFirst) {
+                    markFirst = false;
+                    tickCounter = 0;
+                }
+                if (tickCounter >= 400)
+                {
+                    mc.thePlayer.sendChatMessage("/warp garden");
+                    phase = 0;
+                    tickCounter = 0;
+                    counter = 9;
+                    markFirst = true;
+                }
+
+                break;
+        }
+    }
     public void counterChanger(){
         if (cropfirst){
             switch (dict.get(mode)) {
@@ -512,7 +643,7 @@ public class FullTestMod {
                 case 1:counter = 9;break;
                 case 2:counter = 9;break;
                 case 3:counter = 15;break;
-
+                case 4:counter = 16;break;
             }
             cropfirst = false;
         }
