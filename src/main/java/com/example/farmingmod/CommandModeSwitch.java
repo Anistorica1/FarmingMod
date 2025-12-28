@@ -16,7 +16,7 @@ public class CommandModeSwitch extends CommandBase {
         if (args.length == 1) {
             return getListOfStringsMatchingLastWord(
                     args,
-                    "netherwarts", "wheat", "test","wildrose","cactus"
+                    "netherwarts", "wheat", "test","wildrose","cactus","mushroom"
             );
         }
         return null;
